@@ -1,3 +1,3 @@
 const express = require('express')
 const reservation = express(),
-const {} = require('')
+const {store,update} = require('../../Controllers/Reservation/reservationController')
