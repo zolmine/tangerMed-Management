@@ -1,0 +1,31 @@
+const dotenv = require("dotenv");
+const mongoose = require("mongoose");
+const port = process.env.PORT || 8080;
+dotenv.config({ path: "./.env" });
+process.on("uncaughtException", (error) => {
+  // console.log(error);
+  // console.log(`${error.name} : ${error.message}`);
+  process.exit(1);
+});
+const database = process.env.HOSTED_DATABASE
+console.log(process.env)
+mongoose
+  .connect(database, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("DB connection successful!"));
+const server = require("./index");
+const app = server.listen(port, () => {
+  console.log(`listen on port ${port}...`);
+});
+
+process.on("unhandledRejection", (error) => {
+  // console.log(`${error.name} : ${error.message}`);
+  app.close(() => {
+    console.log("app stopped!");
+    process.exit(1);
+  });
+});
