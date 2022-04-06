@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const log=require("morgan")
  require('dotenv').config();
-console.log(process.env);
+// console.log(process.env);
 app.use(cookieParser())
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
